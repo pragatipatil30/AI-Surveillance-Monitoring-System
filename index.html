@@ -1,0 +1,256 @@
+<!DOCTYPE html> <!-- Tells the browser that this is an HTML5 document -->
+
+<html> <!-- The main container of the webpage -->
+
+    <head>    <!-- Contains information about the webpage -->
+
+        <title>AI SURVEILLANCE & MONITORING SYSTEM</title> <!-- Sets the name shown on the browser tab -->
+        <style>
+            /*css is used to style the html webpage */
+            body {
+                /* changes the overall webpage styPPle */
+                font-family: Arial, sans-serif;
+                background-color: #0f172a;
+                color:aliceblue;
+                text-align: center;
+            }
+            h1 {
+                font-size: 36px;
+                margin-bottom: 10px;
+            }
+
+            p {
+                /*styles the paragraph text*/
+                font-size: 18px;
+                color: #cbd5e1;
+                line-height: 1.6;
+            }
+            button {
+                /*style the button*/
+                background-color: #2563eb;
+                color: white;
+                padding: 12px 24px;
+                font-size: 16px;
+                font-weight: bold;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+            }
+            h2 {
+                /*style the system status heading */
+                color : whitesmoke;
+            }
+            /*creates the dashboard layout*/
+            .dashboard {
+                display: flex;
+                justify-content: center;
+                gap: 20px;
+                margin-top: 30px;
+            }
+            /*styles each dashboard card*/
+            .card {
+                background-color: #1e293b;
+                color: white;
+                padding: 20px;
+                width: 240px;
+                border-radius: 12px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            }
+            .monitoring {
+                margin-top:40px ;
+            }
+            .status {
+                font-weight: bold;
+            }
+            .online {
+                color : #22c55e;
+            }
+            .offline  {
+                color: #ef4444;
+            }
+            .alert {
+                color: #f59e0b;
+            }
+            .camera-box {
+                position: relative;
+                width: 80%;
+                max-width: 900px;
+                height: 400px;
+                margin: auto;
+                background-color: #020617;
+                border: 2px solid #334155;
+                border-radius: 12px;
+                color: #94a3b8;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                gap: 8px;
+            }
+            .live-badge {
+                position: absolute;
+                top: 15px;
+                left: 15px;
+                background-color: #dc2626;
+                color: white;
+                padding: 6px 12px;
+                border-radius: 6px;
+                font-size: 14px;
+                font-weight: bold;
+            }
+            .live-badge.live {
+                background-color: #16a34a;
+
+            }
+            .analysis {
+                margin-top: 40px;
+            }
+            .analysis-card {
+                flex: 1;
+                max-width: 900px;
+                margin: auto;
+                background-color: #1e293b;
+                padding: 20px;
+                border-radius: 12px;
+                border: 1px solid #334155;
+                min-height: 120px;
+            }
+            .analysis-card h3 {
+                color: white;
+            }
+            .analysis-card p {
+                color: #94a3b8;
+            }
+            .analysis-cards {
+                display: flex;
+                justify-content: center;
+                gap: 20px;
+                width: 80px;
+                max-width: 900px;
+                margin: auto;
+            }
+            .events {
+                margin-top: 40px;
+            }
+            .event-card {
+                width: 80%;
+                max-width: 900px;
+                margin: auto;
+                background-color: #1e293b;
+                padding: 20px;
+                border-radius: 12px;
+                border: 1px solid #334155;
+                text-align: left;
+            }
+            .event-card p {
+                margin: 0;
+                color: white;
+                font-weight: bold;
+            }
+
+            .event-card span {
+                color: #94a3b8;             
+            }
+
+        </style>
+    </head>
+    <body><!-- Contains everything that is visible on the webpage -->
+
+        <h1>AI Surveillance & Monitoring System</h1>
+        <p>An intelligent surveillance platform that uses Computer Vision to analyze visual data, monitor activities, and provide timely alerts for potential events.</p>
+        <button onclick="startMonitoring()">Start Monitoring</button><!-- button = Creates a clickable button -->
+        <div class="dashboard">
+            <div class="card">
+                <h2>System Status</h2>
+                <p id="systemStatus" class="status offline">● OFFLINE</p>
+            </div>
+            <div class="card">
+                <h2>Camera Status</h2>
+                <p id="cameraStatus" class="status offline">● OFFLINE</p>
+            </div>
+            <div class="card">
+                <h2>Alerts</h2>
+                <p class="status alert">● 0 ALERTS</p>
+            </div>
+        </div>
+        <div class="monitoring">
+                <h2>Monitoring Area</h2>
+                <div class="camera-box">
+                    <div id="liveBadge" class="live-badge">● OFFLINE</div>
+                    <p class= "camera-indicator"> ● OFFLINE </p>
+                    <p class="camera-feed-text">CAMERA FEED </p>
+                </div>
+        </div>
+        <div class="analysis">
+            <h2>Detection & Analysis</h2>
+              <div class="analysis-cards">
+
+                <div class="analysis-card">
+                  <h3>Current Result</h3>
+                  <p id="analysisResult">WAITING</p>
+                </div>
+
+                <div class="analysis-card">
+                   <h3>Confidence</h3>
+                   <p>-- %</p>
+                </div>
+
+                <div class="analysis-card">
+                  <h3>Last Analysis</h3>
+                  <p>--</p>
+                </div>  
+        </div>
+        <div class="events">
+            <h2>Recent Events</h2>
+            <div class="event-card">
+                <p>System started</p>
+                <span>Waiting for events...</span>
+            </div>
+
+        </div>
+        <script>
+            // Creates a function that runs when the Start Monitoring button is clicked//
+            function startMonitoring() {
+                //stores whether the system is online
+                let systemOnline = true;
+                //checks if the system is online
+                if (systemOnline) {
+                    //show online when the condition is true
+                    console.log("System is ONLINE");
+                } else {
+                    //show online when the condition is false 
+                    console.log("System is OFFLINE");
+                }
+                // Finds the system status element using its id
+                let status = document.getElementById("systemStatus");
+                if (systemOnline) {
+                 // Changes the system status text from OFFLINE to ONLINE
+                      status.innerHTML = "● ONLINE";
+                } else {
+                    //shows offline 
+                    status.innerHTML = "● OFFLINE";
+                }
+                //changes the system status text color to green
+                status.style.color = "#22c55e";
+                //finds the camera status element using its id
+                let camera = document.getElementById("cameraStatus");
+                //changes the camera status text from offline to live
+                camera.innerHTML = "● LIVE";
+                //text color to green
+                camera.style.color = "#22c55e";
+                //finds live badge using its id
+                let badge = document.getElementById("liveBadge");
+                //change the badge text from offline to live
+                badge.innerHTML = "● LIVE";
+                //adds the live css class to the badge
+                badge.classList.add("live"); 
+                //finds the analysis result element using its id
+                let analysisResult = document.getElementById("analysisResult");
+                //changes the analysis result from waiting to analyzing
+                analysisResult.innerHTML = "ANALYZING";   
+                
+
+            }
+        </script>
+    </body>
+</html>

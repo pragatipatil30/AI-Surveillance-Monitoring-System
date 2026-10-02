@@ -16,7 +16,8 @@
             }
             h1 {
                 font-size: 36px;
-                margin-bottom: 10px;
+                margin-top: 35px;
+                margin-bottom: 15px;
             }
 
             p {
@@ -154,12 +155,59 @@
             .upload-section {
                 margin-top: 40px;
             }
+            header {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+                padding: 20px 40px;
+                background-color:#020617;
+                border-bottom: 1px solid #334155;
+            }
+            .logo {
+                font-size: 20px;
+                font-weight: bold;
+            }
+            .logo span {
+                color: #38bdf8;
+            }
+            .logo span {
+                color: #38bdf8;
+            }
+            nav {
+                display: flex;
+                gap: 25px;
+            }
+            nav a { 
+                color: #cbd5e1;
+                text-decoration: none;
+                font-size: 15px;
+                font-weight: bold;
+                padding: 8px 14px;
+                border-radius: 6px;
+            }
+            nav a:hovor {
+                color:#38bdf8;
+                background-color: #1e293b;
+            }
+
            
         </style>
     </head>
     <body><!-- Contains everything that is visible on the webpage -->
-
-        <h1>AI Surveillance & Monitoring System</h1>
+        <header>
+        <div class = "logo">
+            🛡 AI SURVEILLANCE
+            <span>& MONITORING SYSTEM</span>
+        </div>
+        <nav>
+            <a href="#dashboard">Dashboard</a>
+            <a href="#monitoring">Monitoring</a>
+            <a href="#events">Events</a>
+            <a href="#reports">Reports</a>
+        </nav>
+    </header>
+        <h1>Surveillance Dashboard</h1>
         <p>An intelligent surveillance platform that uses Computer Vision to analyze visual data, monitor activities, and provide timely alerts for potential events.</p>
         <button onclick="startMonitoring()">Start Monitoring</button><!-- button = Creates a clickable button -->
         <button onclick="stopMonitoring()">Stop Monitoring</button>

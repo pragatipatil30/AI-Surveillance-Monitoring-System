@@ -125,7 +125,7 @@
                 display: flex;
                 justify-content: center;
                 gap: 20px;
-                width: 80px;
+                width: 80%;
                 max-width: 900px;
                 margin: auto;
             }
@@ -151,7 +151,10 @@
             .event-card span {
                 color: #94a3b8;             
             }
-
+            .upload-section {
+                margin-top: 40px;
+            }
+           
         </style>
     </head>
     <body><!-- Contains everything that is visible on the webpage -->
@@ -159,6 +162,7 @@
         <h1>AI Surveillance & Monitoring System</h1>
         <p>An intelligent surveillance platform that uses Computer Vision to analyze visual data, monitor activities, and provide timely alerts for potential events.</p>
         <button onclick="startMonitoring()">Start Monitoring</button><!-- button = Creates a clickable button -->
+        <button onclick="stopMonitoring()">Stop Monitoring</button>
         <div class="dashboard">
             <div class="card">
                 <h2>System Status</h2>
@@ -170,14 +174,14 @@
             </div>
             <div class="card">
                 <h2>Alerts</h2>
-                <p class="status alert">● 0 ALERTS</p>
+                <p id="alertStatus" class="status alert">● 0 ALERTS</p>
             </div>
         </div>
         <div class="monitoring">
                 <h2>Monitoring Area</h2>
                 <div class="camera-box">
                     <div id="liveBadge" class="live-badge">● OFFLINE</div>
-                    <p class= "camera-indicator"> ● OFFLINE </p>
+                    <p class= "camera-indicator" class="camera-indicator"> ● OFFLINE </p>
                     <p class="camera-feed-text">CAMERA FEED </p>
                 </div>
         </div>
@@ -192,12 +196,12 @@
 
                 <div class="analysis-card">
                    <h3>Confidence</h3>
-                   <p>-- %</p>
+                   <p id="confidenceValue">-- %</p>
                 </div>
 
                 <div class="analysis-card">
                   <h3>Last Analysis</h3>
-                  <p>--</p>
+                  <p id = "lastAnalysis">--</p>
                 </div>  
         </div>
         <div class="events">
@@ -206,8 +210,9 @@
                 <p>System started</p>
                 <span>Waiting for events...</span>
             </div>
-
         </div>
+        
+
         <script>
             // Creates a function that runs when the Start Monitoring button is clicked//
             function startMonitoring() {
@@ -238,6 +243,12 @@
                 camera.innerHTML = "● LIVE";
                 //text color to green
                 camera.style.color = "#22c55e";
+                //finds the camera indicator inside the monitoring area
+                let cameraIndicator = document.getElementById("cameraIndicator");
+                //changes the camera indicator from offline to live
+                cameraIndicator.innerHTML = "● LIVE";
+                //change the indicator color to green
+                cameraIndicator.style.color = "#22c55e";
                 //finds live badge using its id
                 let badge = document.getElementById("liveBadge");
                 //change the badge text from offline to live
@@ -245,11 +256,44 @@
                 //adds the live css class to the badge
                 badge.classList.add("live"); 
                 //finds the analysis result element using its id
+                // Finds the analysis result element using its id
                 let analysisResult = document.getElementById("analysisResult");
-                //changes the analysis result from waiting to analyzing
-                analysisResult.innerHTML = "ANALYZING";   
-                
-
+                // Changes the analysis result from waiting to analyzing
+                analysisResult.innerHTML = "ANALYZING";
+                let confidenceValue = document.getElementById("confidenceValue");
+                let lastAnalysis = document.getElementById("lastAnalysis");
+                // Finds the Recent Events card
+                let eventCard = document.querySelector(".event-card");
+                // Changes the event title
+                eventCard.querySelector("p").innerHTML = "Monitoring started";
+                 // Changes the event description
+                eventCard.querySelector("span").innerHTML = "System is now monitoring";
+                let alertStatus = document.getElementById("alertStatus");
+                alertStatus.innerHTML = "● 1 ALERT";
+                setTimeout(function() {
+                   // Changes the result from ANALYZING to PASS 
+                   analysisResult.innerHTML = "PASS";
+                    // Shows the confidence of the analysis
+                   confidenceValue.innerHTML = "92%";
+                   // Shows the time of the last analysis
+                   lastAnalysis.innerHTML = new Date().toLocaleTimeString();
+                }, 2000);
+            }
+            function stopMonitoring() {
+                let status = document.getElementById("systemStatus");
+                status.innerHTML = "● OFFLINE";
+                status.style.color = "#ef4444";
+                let camera = document.getElementById("cameraStatus");
+                camera.innerHTML = "● OFFLINE";
+                camera.style.color = "#ef4444";
+                let cameraIndicator = document.getElementById("cameraIndicator");
+                cameraIndicator.innerHTML = "● OFFLINE";
+                cameraIndicator.style.color = "#ef4444";
+                let badge = document.getElementById("liveBadge");
+                badge.innerHTML = "● OFFLINE";
+                badge.classList.remove("live");
+                let alertStatus = document.getElementById("alertStatus");
+                alertStatus.innerHTML = "● 0 ALERTS";
             }
         </script>
     </body>

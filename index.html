@@ -7,17 +7,22 @@
         <title>AI SURVEILLANCE & MONITORING SYSTEM</title> <!-- Sets the name shown on the browser tab -->
         <style>
             /*css is used to style the html webpage */
+            html {
+                scroll-behavior: smooth;
+            }
             body {
                 /* changes the overall webpage styPPle */
                 font-family: Arial, sans-serif;
                 background-color: #0f172a;
                 color:aliceblue;
                 text-align: center;
+                background: linear-gradient(180deg, #0f172a, #020617);
             }
             h1 {
                 font-size: 36px;
                 margin-top: 35px;
                 margin-bottom: 15px;
+                text-shadow: 0 0 15px rgba(56, 189, 248, 0.25);
             }
 
             p {
@@ -25,6 +30,7 @@
                 font-size: 18px;
                 color: #cbd5e1;
                 line-height: 1.6;
+                max-width: 800px;
             }
             button {
                 /*style the button*/
@@ -36,10 +42,23 @@
                 border: none;
                 border-radius: 8px;
                 cursor: pointer;
+                transition: 0.3s;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            }
+            button:hover {
+                transform: translateY(-2px);
+                opacity: 0.9;
             }
             h2 {
                 /*style the system status heading */
                 color : whitesmoke;
+                font-size: 24px;
+                margin-bottom: 20px;
+            }
+            main {
+                width: 90%;
+                max-width: 1200px;
+                margin: auto;
             }
             /*creates the dashboard layout*/
             .dashboard {
@@ -47,21 +66,35 @@
                 justify-content: center;
                 gap: 20px;
                 margin-top: 30px;
+                flex-wrap: wrap;
+                align-items: stretch;
+                margin-bottom: 40px;
             }
             /*styles each dashboard card*/
             .card {
-                background-color: #1e293b;
+                background-color: #172033;
                 color: white;
                 padding: 20px;
                 width: 240px;
                 border-radius: 12px;
-                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
+                transition: 0.3s;
+                border: 3px solid #5f6b70;
+            }
+            .card h3 {
+                color: #e2e8f0;
+                margin-bottom: 10px;
+            }
+            .card:hover {
+                transform: translateY(-5px);
             }
             .monitoring {
                 margin-top:40px ;
+                padding-top: 10px;
             }
             .status {
                 font-weight: bold;
+                font-size: 18px;
             }
             .online {
                 color : #22c55e;
@@ -71,22 +104,32 @@
             }
             .alert {
                 color: #f59e0b;
+                font-weight: bold;
             }
             .camera-box {
                 position: relative;
-                width: 80%;
+                width: 90%;
                 max-width: 900px;
-                height: 400px;
+                height: 450px;
                 margin: auto;
                 background-color: #020617;
-                border: 2px solid #334155;
-                border-radius: 12px;
+                border: 3px solid #5f6b70;
+                border-radius: 16px;
                 color: #94a3b8;
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 flex-direction: column;
                 gap: 8px;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+                overflow: hidden;
+                font-size: 16px;
+                background-image: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 3px,
+                rgba(255, 255, 255, 0.02) 4px
+                );
             }
             .live-badge {
                 position: absolute;
@@ -98,13 +141,27 @@
                 border-radius: 6px;
                 font-size: 14px;
                 font-weight: bold;
+                box-shadow: 0 0 10px rgba(220, 38, 38, 0.5);
             }
             .live-badge.live {
                 background-color: #16a34a;
+                box-shadow: 0 0 12px rgba(22, 163, 74, 0.6);
 
+            }
+            .camera-label {
+                position: absolute;
+                top: 15px;
+                right: 15px;
+                color: #cbd5e1;
+                font-size: 14px;
+                font-weight: bold;
+                background-color: rgba(15, 23, 42, 0.8);
+                padding: 6px 10px;
+                border-radius: 6px;
             }
             .analysis {
                 margin-top: 40px;
+                padding-top: 10px;
             }
             .analysis-card {
                 flex: 1;
@@ -115,6 +172,10 @@
                 border-radius: 12px;
                 border: 1px solid #334155;
                 min-height: 120px;
+                transition: 0.3s;
+            }
+            .analysis-card:hover {
+                transform: translateY(-4px);
             }
             .analysis-card h3 {
                 color: white;
@@ -131,22 +192,28 @@
                 margin: auto;
             }
             .events {
-                margin-top: 40px;
+                margin-top: 50px;
             }
             .event-card {
                 width: 80%;
                 max-width: 900px;
                 margin: auto;
-                background-color: #1e293b;
+                background-color: #172033;
                 padding: 20px;
                 border-radius: 12px;
-                border: 1px solid #334155;
+                border: 3px solid #5f6b70;
                 text-align: left;
+                transition: 0.3s;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25)
+            }
+            .event-card:hover {
+                border-color: #38bdf8;
             }
             .event-card p {
                 margin: 0;
                 color: white;
                 font-weight: bold;
+                font-size: 16px;
             }
 
             .event-card span {
@@ -163,10 +230,15 @@
                 padding: 20px 40px;
                 background-color:#020617;
                 border-bottom: 1px solid #334155;
+                position: sticky;
+                top: 0;
+                z-index: 1000;
             }
             .logo {
                 font-size: 20px;
                 font-weight: bold;
+                letter-spacing: 1px;
+                color: #e2e8f0;
             }
             .logo span {
                 color: #38bdf8;
@@ -177,6 +249,7 @@
             nav {
                 display: flex;
                 gap: 25px;
+                align-items: center;
             }
             nav a { 
                 color: #cbd5e1;
@@ -186,9 +259,28 @@
                 padding: 8px 14px;
                 border-radius: 6px;
             }
-            nav a:hovor {
+            nav a:hover {
                 color:#38bdf8;
                 background-color: #1e293b;
+            }
+            nav a.active {
+                 
+                    color: #38bdf8;
+                    background-color: #1e293b;
+                 
+            }
+            @media (max-width: 768px) {
+                .dashboard {
+                    flex-direction: column;
+                    align-items: center;
+                }
+                .analysis-cards {
+                    flex-direction: column;
+                }
+                nav {
+                    flex-wrap: wrap;
+                    justify-content: center;
+                }
             }
 
            
@@ -211,7 +303,7 @@
         <p>An intelligent surveillance platform that uses Computer Vision to analyze visual data, monitor activities, and provide timely alerts for potential events.</p>
         <button onclick="startMonitoring()">Start Monitoring</button><!-- button = Creates a clickable button -->
         <button onclick="stopMonitoring()">Stop Monitoring</button>
-        <div class="dashboard">
+        <div class="dashboard" id = "dashboard">
             <div class="card">
                 <h2>System Status</h2>
                 <p id="systemStatus" class="status offline">● OFFLINE</p>
@@ -225,10 +317,11 @@
                 <p id="alertStatus" class="status alert">● 0 ALERTS</p>
             </div>
         </div>
-        <div class="monitoring">
+        <div class="monitoring" id="monitoring">
                 <h2>Monitoring Area</h2>
                 <div class="camera-box">
                     <div id="liveBadge" class="live-badge">● OFFLINE</div>
+                    <div class="camera-label">CAM-01</div>
                     <p id= "cameraIndicator" class="camera-indicator"> ● OFFLINE </p>
                     <p class="camera-feed-text">CAMERA FEED </p>
                 </div>
@@ -250,13 +343,21 @@
                 <div class="analysis-card">
                   <h3>Last Analysis</h3>
                   <p id = "lastAnalysis">--</p>
-                </div>  
+                </div>
+              </div>
         </div>
-        <div class="events">
+        <div class="events" id ="events">
             <h2>Recent Events</h2>
             <div class="event-card">
                 <p>System started</p>
                 <span>Waiting for events...</span>
+            </div>
+        </div>
+        <div class="reports" id="reports">
+            <h2>Reports</h2>
+            <div class="event-card report-card">
+                <p>Surveillance Reports</p>
+                <span>Reports and analysis history will appear here.</span>
             </div>
         </div>
         
@@ -343,6 +444,20 @@
                 let alertStatus = document.getElementById("alertStatus");
                 alertStatus.innerHTML = "● 0 ALERTS";
             }
+    
+        window.addEventListener("scroll", function() {
+            let sections = document.querySelectorAll("#dashboard, #monitoring, #events, #reports");
+            let navLinks = document.querySelectorAll("nav a");
+            sections.forEach(function(section, index) {
+                let position = section.getBoundingClientRect();
+                if (position.top <= 150 && position.bottom >= 150) {
+                    navLinks.forEach(function(link) {
+                        link.classList.remove("active");
+                    });
+                    navLinks[index].classList.add("active");
+                }
+            });
+        });
         </script>
     </body>
 </html>

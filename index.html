@@ -49,6 +49,13 @@
                 transform: translateY(-2px);
                 opacity: 0.9;
             }
+            .stop-button {
+                 background-color: #dc2626;
+                }
+
+            .stop-button:hover {
+                   background-color: #b91c1c;
+            }
             h2 {
                 /*style the system status heading */
                 color : whitesmoke;
@@ -75,7 +82,7 @@
                 background-color: #172033;
                 color: white;
                 padding: 20px;
-                width: 240px;
+                width: 260px;
                 border-radius: 12px;
                 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
                 transition: 0.3s;
@@ -84,6 +91,11 @@
             .card h3 {
                 color: #e2e8f0;
                 margin-bottom: 10px;
+            }
+            .card h2 {
+                color: #e2e8f0;
+                font-size: 18px;
+                margin_bottom: 10px;
             }
             .card:hover {
                 transform: translateY(-5px);
@@ -94,7 +106,8 @@
             }
             .status {
                 font-weight: bold;
-                font-size: 18px;
+                font-size: 20px;
+                letter-spacing: 0.5px;
             }
             .online {
                 color : #22c55e;
@@ -121,7 +134,7 @@
                 align-items: center;
                 flex-direction: column;
                 gap: 8px;
-                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+                box-shadow: 0 0 25px rgba(56, 189, 248, 0.12);
                 overflow: hidden;
                 font-size: 16px;
                 background-image: repeating-linear-gradient(
@@ -153,7 +166,8 @@
                 top: 15px;
                 right: 15px;
                 color: #cbd5e1;
-                font-size: 14px;
+                font-size: 13px;
+                letter-spacing: 1px;
                 font-weight: bold;
                 background-color: rgba(15, 23, 42, 0.8);
                 padding: 6px 10px;
@@ -171,7 +185,7 @@
                 padding: 20px;
                 border-radius: 12px;
                 border: 1px solid #334155;
-                min-height: 120px;
+                min-height: 140px;
                 transition: 0.3s;
             }
             .analysis-card:hover {
@@ -181,7 +195,10 @@
                 color: white;
             }
             .analysis-card p {
-                color: #94a3b8;
+                color: #38bdf8;
+                font-size: 20px;
+                font-weight: bold;
+
             }
             .analysis-cards {
                 display: flex;
@@ -193,6 +210,7 @@
             }
             .events {
                 margin-top: 50px;
+                padding-bottom: 10px;
             }
             .event-card {
                 width: 80%;
@@ -282,6 +300,22 @@
                     justify-content: center;
                 }
             }
+            .system-info {
+                color: #64748b;
+                font-size: 13px;
+                letter-spacing: 1px;
+                margin-bottom: 25px;
+            }
+            .camera-feed-text {
+                color: #64748b;
+                font-size: 14px;
+                letter_spacing: 2px;
+                font_weight: bold;
+            }
+            .reports {
+                  margin-top: 40px;
+                  margin-bottom: 40px;
+            }
 
            
         </style>
@@ -301,8 +335,9 @@
     </header>
         <h1>Surveillance Dashboard</h1>
         <p>An intelligent surveillance platform that uses Computer Vision to analyze visual data, monitor activities, and provide timely alerts for potential events.</p>
+        <p class="system-info">SYSTEM: AI SURVEILLANCE | MODE: MONITORING | STATUS: READY</p>
         <button onclick="startMonitoring()">Start Monitoring</button><!-- button = Creates a clickable button -->
-        <button onclick="stopMonitoring()">Stop Monitoring</button>
+        <button class="stop-button" onclick="stopMonitoring()">Stop Monitoring</button>
         <div class="dashboard" id = "dashboard">
             <div class="card">
                 <h2>System Status</h2>
